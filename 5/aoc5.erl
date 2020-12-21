@@ -6,7 +6,7 @@
 solve() ->
     Input = input(),
     R1 = solve_1(Input),
-    R2 = solve_2(Input),
+    R2 = solve_2(Input, R1),
     io:format(user, "Result 1: ~p~n", [R1]),
     io:format(user, "Result 2: ~p~n", [R2]).
 
@@ -36,9 +36,9 @@ binary_space(Lower, Upper, Interval, String) ->
                                    end, Interval, String),
     Result.
 
-solve_2(Input) ->
+solve_2(Input, MaxSeat) ->
     Occupied = [ calc_seat_number(Row) || Row <- Input ],
-    Available = lists:seq(0,820),
+    Available = lists:seq(0, MaxSeat),
     Free = [ X || X <- Available, not lists:member(X, Occupied) ],
     [MySeat] = lists:filter(fun(X) ->
                                     not(lists:member(X-1, Free) orelse
