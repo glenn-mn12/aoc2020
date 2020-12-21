@@ -32,8 +32,7 @@ binary_space(Lower, Upper, Interval, String) ->
                                            {1 + Min + Int div 2, Max};
                                       (U, {Min, Max}) when U =:= Upper ->
                                            Int = Max - Min,
-                                           {Min, Min + Int div 2};
-                                      (What, Now) -> throw({What, Now})
+                                           {Min, Min + Int div 2}
                                    end, Interval, String),
     Result.
 
