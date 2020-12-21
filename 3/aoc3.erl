@@ -20,9 +20,7 @@ solve_2(Map) ->
 
 solve(Map, Sequences) ->
     lists:foldl(fun({XSteps, YSteps}, Acc) ->
-                        A = solve(Map, XSteps, YSteps),
-                        io:format("~p ~p ~p~n", [XSteps, YSteps, A]),
-                        Acc * A
+                        Acc * solve(Map, XSteps, YSteps)
                 end, 1, Sequences).
 
 solve(Map, XSteps, YSteps) ->
