@@ -23,13 +23,9 @@ solve_2(Passports) ->
 
 
 valid_passport_1(Passport) ->
-    Keys = [ Key || {Key, _} <- Passport ],
     RequiredKeys = [byr, iyr, eyr, hgt, hcl, ecl, pid],
-    lists:foldl(fun(_, false) ->
-                        false;
-                   (Key, true) ->
-                        lists:member(Key, Keys)
-                end, true, RequiredKeys).
+    Keys = [ Key || {Key, _} <- Passport, lists:member(Key, RequiredKeys) ],
+    length(lists:usort(Keys)) == length(RequiredKeys).
 
 valid_passport_2(Passport) ->
     RequiredKeys = [{byr, valid_year, {1920, 2002}},
